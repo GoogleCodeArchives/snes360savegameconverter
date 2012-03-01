@@ -35,5 +35,12 @@ namespace Snes360SGC
         {
             this.Close();
         }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUpdate UpdateForm = new frmUpdate();
+
+
+        }
     }
 }

@@ -119,7 +119,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\Version\VersionInfo.cs" />
+    <Compile Include="Tools\VersionInfo\VersionInfo.cs" />
     <EmbeddedResource Include="Forms\frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,6 +144,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Version.ver">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

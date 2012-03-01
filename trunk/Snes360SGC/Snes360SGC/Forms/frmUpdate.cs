@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Snes360SGC.Tools.VersionInfo;
 
 namespace Snes360SGC.Forms
 {
@@ -14,6 +15,11 @@ namespace Snes360SGC.Forms
         public frmUpdate()
         {
             InitializeComponent();
+
+            VersionInfo version = new VersionInfo();
+
+            version.getNewestVersion();
+
         }
     }
 }
