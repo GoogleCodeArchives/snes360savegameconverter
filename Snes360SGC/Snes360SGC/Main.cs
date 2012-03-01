@@ -40,7 +40,7 @@ namespace Snes360SGC
         {
             frmUpdate UpdateForm = new frmUpdate();
 
-
+            UpdateForm.ShowDialog();
         }
     }
 }
