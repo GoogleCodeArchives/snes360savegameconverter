@@ -32,7 +32,7 @@ namespace Snes360SGC.Tools.VersionInfo
             /// <returns>version string</returns>
             internal string getFullVersion() 
             {
-                return Major.ToString() + "." + Minor.ToString() + "." + Build.ToString() + "." + Revision.ToString() + ".";
+                return Major.ToString() + "." + Minor.ToString() + "." + Build.ToString() + "." + Revision.ToString();
             }
 
             #endregion
@@ -40,18 +40,28 @@ namespace Snes360SGC.Tools.VersionInfo
 
         #endregion
 
+        string PATH_TO_LOCAL_VERSION = Environment.CurrentDirectory.ToString() + "\\Version.ver";
+
         internal versionInfoStruct versionInfo = new versionInfoStruct();
 
+        #endregion
+
+        #region Functions
+
+        /// <summary>
+        /// Gets the latest version identifier file
+        /// </summary>
+        /// <returns>The Version Structure</returns>
         internal versionInfoStruct getNewestVersion()
         {
-            versionInfoStruct value = new versionInfoStruct();
-
-            //check latest version
-            readVersionFile(downloadUpdateVersion());
-
-            return value;
+            return readVersionFile(downloadUpdateVersion());
         }
 
+        /// <summary>
+        /// Reads a version file
+        /// </summary>
+        /// <param name="location">Path to version file to read</param>
+        /// <returns>The Version Stucture</returns>
         private versionInfoStruct readVersionFile(string location)
         {
             versionInfoStruct value = new versionInfoStruct();
@@ -79,6 +89,10 @@ namespace Snes360SGC.Tools.VersionInfo
             return value;
         }
 
+        /// <summary>
+        /// Downloads the latest version identifier file
+        /// </summary>
+        /// <returns>the temp path of the downloaded version file to be read</returns>
         private string downloadUpdateVersion()
         {
             string tmpLocation = Path.GetTempPath() + "updateVersion.ver";
@@ -88,6 +102,56 @@ namespace Snes360SGC.Tools.VersionInfo
             webClient.DownloadFile(remoteUri, tmpLocation);
 
             return tmpLocation;
+        }
+
+        /// <summary>
+        /// Gets the current running version
+        /// </summary>
+        /// <returns>The version Stucture</returns>
+        internal versionInfoStruct getCurrentVersion()
+        {
+            versionInfoStruct value = new versionInfoStruct();
+
+            if (File.Exists(PATH_TO_LOCAL_VERSION))
+                value = readVersionFile(PATH_TO_LOCAL_VERSION);
+
+            return value;
+        }
+
+        internal bool checkIfNewer(versionInfoStruct installedVersion, versionInfoStruct LatestVersion)
+        {
+            return compareVersions(installedVersion, LatestVersion);
+        }
+
+        private bool compareVersions(versionInfoStruct InstalledVersion, versionInfoStruct LatestVersion)
+        {
+            bool result = false;
+
+            try
+            {
+                if (LatestVersion.Major > InstalledVersion.Major)
+                {
+                    result = true;
+                }
+                else if (LatestVersion.Minor > InstalledVersion.Minor)
+                {
+                    result = true;
+                }
+                else if (LatestVersion.Build > InstalledVersion.Build)
+                {
+                    result = true;
+                }
+                else if (LatestVersion.Revision > InstalledVersion.Revision)
+                {
+                    result = true;
+                }
+            }
+            catch
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         #endregion
