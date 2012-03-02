@@ -1,0 +1,6 @@
+﻿+frmChangeLogViewer Form:Added
++frmUpdate Form: Added ChangeLog Button
++frmUpdate Form: Added change installer textbox font colour
++VersionInfo Class:Added Enum for file download locations
+
+=VersionInfo Class:Changed download new version file function to download a file that is passed from the downloadFileType enum

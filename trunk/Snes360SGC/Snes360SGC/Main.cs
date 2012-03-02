@@ -42,5 +42,23 @@ namespace Snes360SGC
 
             UpdateForm.ShowDialog();
         }
+
+        private void btnMainBuild_Click(object sender, EventArgs e)
+        {
+            pnlMainBackground.Visible = false;
+            tabControl1.Visible = true;
+
+            tabControl1.SelectedIndex = 0;
+            
+        }
+
+        private void btnMainExtract_Click(object sender, EventArgs e)
+        {
+            pnlMainBackground.Visible = false;
+
+            tabControl1.Visible = true;
+
+            this.tabControl1.SelectedIndex = 1;
+        }
     }
 }

@@ -99,6 +99,12 @@
     <Compile Include="Forms\frmAbout.Designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmChangeLogViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmChangeLogViewer.Designer.cs">
+      <DependentUpon>frmChangeLogViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     <Compile Include="Tools\VersionInfo\VersionInfo.cs" />
     <EmbeddedResource Include="Forms\frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmChangeLogViewer.resx">
+      <DependentUpon>frmChangeLogViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmUpdate.resx">
       <DependentUpon>frmUpdate.cs</DependentUpon>
@@ -151,7 +160,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ChangeLog.txt" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>

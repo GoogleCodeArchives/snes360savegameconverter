@@ -36,6 +36,7 @@
             this.txtLatestVersion = new System.Windows.Forms.TextBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnChangeLog = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +58,7 @@
             this.btnCheckForUpdates.TabIndex = 1;
             this.btnCheckForUpdates.Text = "Check for &Updates";
             this.btnCheckForUpdates.UseVisualStyleBackColor = true;
+            this.btnCheckForUpdates.Click += new System.EventHandler(this.btnCheckForUpdates_Click);
             // 
             // label1
             // 
@@ -79,7 +81,7 @@
             // txtInstalledVersion
             // 
             this.txtInstalledVersion.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtInstalledVersion.Location = new System.Drawing.Point(99, 22);
+            this.txtInstalledVersion.Location = new System.Drawing.Point(99, 25);
             this.txtInstalledVersion.Name = "txtInstalledVersion";
             this.txtInstalledVersion.ReadOnly = true;
             this.txtInstalledVersion.Size = new System.Drawing.Size(100, 13);
@@ -90,7 +92,7 @@
             // txtLatestVersion
             // 
             this.txtLatestVersion.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLatestVersion.Location = new System.Drawing.Point(99, 54);
+            this.txtLatestVersion.Location = new System.Drawing.Point(99, 57);
             this.txtLatestVersion.Name = "txtLatestVersion";
             this.txtLatestVersion.ReadOnly = true;
             this.txtLatestVersion.Size = new System.Drawing.Size(100, 13);
@@ -107,6 +109,7 @@
             this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // groupBox1
             // 
@@ -120,11 +123,23 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
+            // btnChangeLog
+            // 
+            this.btnChangeLog.Enabled = false;
+            this.btnChangeLog.Location = new System.Drawing.Point(210, 130);
+            this.btnChangeLog.Name = "btnChangeLog";
+            this.btnChangeLog.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeLog.TabIndex = 8;
+            this.btnChangeLog.Text = "Change &Log";
+            this.btnChangeLog.UseVisualStyleBackColor = true;
+            this.btnChangeLog.Click += new System.EventHandler(this.btnChangeLog_Click);
+            // 
             // frmUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(424, 165);
+            this.Controls.Add(this.btnChangeLog);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnCheckForUpdates);
@@ -151,5 +166,6 @@
         private System.Windows.Forms.TextBox txtLatestVersion;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnChangeLog;
     }
 }
