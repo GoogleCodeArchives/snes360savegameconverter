@@ -4,9 +4,62 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Net;
+using System.Reflection;
 
 namespace Snes360SGC.Tools.VersionInfo
 {
+    internal enum downloadFileType
+    {
+        [StringValue("http://snes360savegameconverter.googlecode.com/files/Version.ver")]
+        version = 1,
+        [StringValue("http://snes360savegameconverter.googlecode.com/files/ChangeLog.txt")]
+        changeLog = 2,
+        [StringValue("http://snes360savegameconverter.googlecode.com/files/ChangeLog.txt")]
+        newestUpdate = 3
+    }
+
+    public class StringValue : System.Attribute
+    {
+        private string _value;
+
+        public StringValue(string value)
+        {
+            _value = value;
+        }
+
+        public string Value
+        {
+            get { return _value; }
+        }
+
+    }
+
+    public static class StringEnum
+    {
+        public static string GetStringValue(Enum value)
+        {
+            string output = null;
+            Type type = value.GetType();
+
+            //Check first in our cached results...
+
+            //Look for our 'StringValueAttribute' 
+
+            //in the field's custom attributes
+
+            FieldInfo fi = type.GetField(value.ToString());
+            StringValue[] attrs =
+               fi.GetCustomAttributes(typeof(StringValue),
+                                       false) as StringValue[];
+            if (attrs.Length > 0)
+            {
+                output = attrs[0].Value;
+            }
+
+            return output;
+        }
+    }
+
     class VersionInfo
     {
         #region Variables
@@ -52,9 +105,22 @@ namespace Snes360SGC.Tools.VersionInfo
         /// Gets the latest version identifier file
         /// </summary>
         /// <returns>The Version Structure</returns>
-        internal versionInfoStruct getNewestVersion()
+        internal versionInfoStruct getNewestVersion(string tempPath)
         {
-            return readVersionFile(downloadUpdateVersion());
+            return readVersionFile(downloadFile(tempPath, downloadFileType.version));
+        }
+
+        internal string getChangeLog(string tempPath)
+        {
+            string path = downloadFile(tempPath, downloadFileType.changeLog);
+            string result = "";
+
+            if (File.Exists(path))
+            {
+                result = path;
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -93,11 +159,12 @@ namespace Snes360SGC.Tools.VersionInfo
         /// Downloads the latest version identifier file
         /// </summary>
         /// <returns>the temp path of the downloaded version file to be read</returns>
-        private string downloadUpdateVersion()
+        private string downloadFile(string tempPath, downloadFileType fileType)
         {
-            string tmpLocation = Path.GetTempPath() + "updateVersion.ver";
+            string remoteUri = StringEnum.GetStringValue(fileType);
+            string tmpLocation = tempPath + "\\" + Path.GetFileName(remoteUri);
 
-            string remoteUri = "http://snes360savegameconverter.googlecode.com/files/Version.ver";
+            
             WebClient webClient = new WebClient();
             webClient.DownloadFile(remoteUri, tmpLocation);
 
