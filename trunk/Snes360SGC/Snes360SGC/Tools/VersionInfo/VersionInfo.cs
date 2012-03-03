@@ -14,7 +14,7 @@ namespace Snes360SGC.Tools.VersionInfo
         version = 1,
         [StringValue("http://snes360savegameconverter.googlecode.com/files/ChangeLog.txt")]
         changeLog = 2,
-        [StringValue("http://snes360savegameconverter.googlecode.com/files/ChangeLog.txt")]
+        [StringValue("http://snes360savegameconverter.googlecode.com/files/Snes360v[version].zip")]
         newestUpdate = 3
     }
 
@@ -31,7 +31,6 @@ namespace Snes360SGC.Tools.VersionInfo
         {
             get { return _value; }
         }
-
     }
 
     public static class StringEnum
@@ -219,6 +218,20 @@ namespace Snes360SGC.Tools.VersionInfo
             }
 
             return result;
+        }
+
+        internal string downloadUpdate(string tempPath)
+        {
+            string value = "";
+
+            string path = downloadFile(tempPath, downloadFileType.newestUpdate);
+
+            if (File.Exists(path))
+            {
+                value = path;
+            }
+
+            return value;
         }
 
         #endregion
