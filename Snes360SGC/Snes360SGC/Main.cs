@@ -60,5 +60,39 @@ namespace Snes360SGC
 
             this.tabControl1.SelectedIndex = 1;
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtSRMLocation.Text = "";
+            txtGameName.Text = "";
+            txtOutputFile.Text = "";
+        }
+
+        private void btnSRMBrowse_Click(object sender, EventArgs e)
+        {
+            dialogInputFile.Title = "Select Input SRM file:";
+            dialogInputFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialogInputFile.FileName = ".srm";
+            dialogInputFile.Multiselect = false;
+            dialogInputFile.Filter = "Snes Save Game|*.srm|All Files|*.*";
+
+            if (dialogInputFile.ShowDialog() == DialogResult.OK)
+            {
+                txtSRMLocation.Text = dialogInputFile.FileName;
+            }
+        }
+
+        private void btnOutputBrowse_Click(object sender, EventArgs e)
+        {
+            dialogOutputFile.Title = "Select Output Snes360 file:";
+            dialogOutputFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialogOutputFile.FileName = "";
+            dialogOutputFile.Filter = "Snes360 Save Game|*.*";
+
+            if (dialogOutputFile.ShowDialog() == DialogResult.OK)
+            {
+                txtOutputFile.Text = dialogInputFile.FileName;
+            }
+        }
     }
 }
