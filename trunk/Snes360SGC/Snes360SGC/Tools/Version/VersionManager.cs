@@ -4,99 +4,26 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Net;
-using System.Reflection;
+using Snes360SGC.Tools.Settings;
+//using Snes360SGC.Tools.VersionInfo;
 
-namespace Snes360SGC.Tools.VersionInfo
+namespace Snes360SGC.Tools.VersionManager
 {
-    internal enum downloadFileType
+    class VersionManager
     {
-        [StringValue("http://snes360savegameconverter.googlecode.com/files/Version.ver")]
-        version = 1,
-        [StringValue("http://snes360savegameconverter.googlecode.com/files/ChangeLog.txt")]
-        changeLog = 2,
-        [StringValue("http://snes360savegameconverter.googlecode.com/files/Snes360v[version].zip")]
-        newestUpdate = 3
-    }
-
-    public class StringValue : System.Attribute
-    {
-        private string _value;
-
-        public StringValue(string value)
-        {
-            _value = value;
-        }
-
-        public string Value
-        {
-            get { return _value; }
-        }
-    }
-
-    public static class StringEnum
-    {
-        public static string GetStringValue(Enum value)
-        {
-            string output = null;
-            Type type = value.GetType();
-
-            //Check first in our cached results...
-
-            //Look for our 'StringValueAttribute' 
-
-            //in the field's custom attributes
-
-            FieldInfo fi = type.GetField(value.ToString());
-            StringValue[] attrs =
-               fi.GetCustomAttributes(typeof(StringValue),
-                                       false) as StringValue[];
-            if (attrs.Length > 0)
-            {
-                output = attrs[0].Value;
-            }
-
-            return output;
-        }
-    }
-
-    class VersionInfo
-    {
-        #region Variables
-
-        #region struct
-
-        internal struct versionInfoStruct
-        {
-            # region Variables
-
-            internal int Major { get; set; }
-            internal int Minor { get; set; }
-            internal int Build { get; set; }
-            internal int Revision { get; set; }
-
-            #endregion
-
-            #region Functions
-
-            /// <summary>
-            /// Gets the version string in format of M.m.B.R
-            /// </summary>
-            /// <returns>version string</returns>
-            internal string getFullVersion() 
-            {
-                return Major.ToString() + "." + Minor.ToString() + "." + Build.ToString() + "." + Revision.ToString();
-            }
-
-            #endregion
-        }
-
-        #endregion
-
+        //string Temp_Path = Settings.Settings
         string PATH_TO_LOCAL_VERSION = Environment.CurrentDirectory.ToString() + "\\Version.ver";
+        private VersionInfo.versionInfoStruct _InstalledVersionInfo = new VersionInfo.versionInfoStruct();
+        private VersionInfo.versionInfoStruct _LatestVersionInfo = new VersionInfo.versionInfoStruct();
 
-        internal versionInfoStruct versionInfo = new versionInfoStruct();
+        internal VersionInfo.versionInfoStruct getInstalledVersionInfo() { return this._InstalledVersionInfo; }
+        internal VersionInfo.versionInfoStruct getLatestVersionInfo() { return this._LatestVersionInfo; }
 
-        #endregion
+        public VersionManager()
+        {
+            //Init();
+            getCurrentVersion();
+        }
 
         #region Functions
 
@@ -104,9 +31,14 @@ namespace Snes360SGC.Tools.VersionInfo
         /// Gets the latest version identifier file
         /// </summary>
         /// <returns>The Version Structure</returns>
-        internal versionInfoStruct getNewestVersion(string tempPath)
+        internal VersionInfo.versionInfoStruct getNewestVersion(string tempPath)
         {
             return readVersionFile(downloadFile(tempPath, downloadFileType.version));
+        }
+
+        internal string getInstalledFullVersionString()
+        {
+            return this._InstalledVersionInfo.getFullVersion();
         }
 
         internal string getChangeLog(string tempPath)
@@ -127,9 +59,9 @@ namespace Snes360SGC.Tools.VersionInfo
         /// </summary>
         /// <param name="location">Path to version file to read</param>
         /// <returns>The Version Stucture</returns>
-        private versionInfoStruct readVersionFile(string location)
+        private VersionInfo.versionInfoStruct readVersionFile(string location)
         {
-            versionInfoStruct value = new versionInfoStruct();
+            VersionInfo.versionInfoStruct value = new VersionInfo.versionInfoStruct();
 
             if (File.Exists(location))
             {
@@ -174,9 +106,9 @@ namespace Snes360SGC.Tools.VersionInfo
         /// Gets the current running version
         /// </summary>
         /// <returns>The version Stucture</returns>
-        internal versionInfoStruct getCurrentVersion()
+        internal VersionInfo.versionInfoStruct getCurrentVersion()
         {
-            versionInfoStruct value = new versionInfoStruct();
+            VersionInfo.versionInfoStruct value = new VersionInfo.versionInfoStruct();
 
             if (File.Exists(PATH_TO_LOCAL_VERSION))
                 value = readVersionFile(PATH_TO_LOCAL_VERSION);
@@ -184,12 +116,12 @@ namespace Snes360SGC.Tools.VersionInfo
             return value;
         }
 
-        internal bool checkIfNewer(versionInfoStruct installedVersion, versionInfoStruct LatestVersion)
+        internal bool checkIfNewer(VersionInfo.versionInfoStruct installedVersion, VersionInfo.versionInfoStruct LatestVersion)
         {
             return compareVersions(installedVersion, LatestVersion);
         }
 
-        private bool compareVersions(versionInfoStruct InstalledVersion, versionInfoStruct LatestVersion)
+        private bool compareVersions(VersionInfo.versionInfoStruct InstalledVersion, VersionInfo.versionInfoStruct LatestVersion)
         {
             bool result = false;
 
@@ -235,5 +167,6 @@ namespace Snes360SGC.Tools.VersionInfo
         }
 
         #endregion
+
     }
 }

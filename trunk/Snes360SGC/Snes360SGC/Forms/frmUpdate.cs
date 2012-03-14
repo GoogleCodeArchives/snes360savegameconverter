@@ -7,31 +7,38 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using Snes360SGC.Tools.VersionInfo;
+using Snes360SGC.Tools;
+using Snes360SGC.Tools.VersionManager;
+using Snes360SGC.Tools.Settings;
 
 namespace Snes360SGC.Forms
 {
     public partial class frmUpdate : Form
     {
+        Settings localSettings;// new Settings();
 
-        VersionInfo version = new VersionInfo();
+        VersionManager VersionManagement = new VersionManager();
 
         VersionInfo.versionInfoStruct InstalledVersionInfo = new VersionInfo.versionInfoStruct();
         VersionInfo.versionInfoStruct LatestVersionInfo = new VersionInfo.versionInfoStruct();
 
-        string TEMP_DIRECTORY = Path.GetTempFileName().Replace(".tmp","");
+        string TEMP_DIRECTORY;
 
         string locationChangeLog = "";
 
         public frmUpdate()
-        {
+        {   
             InitializeComponent();
+
+            localSettings = Settings.getInstance();
 
             Init();
         }
 
         private void Init()
         {
+            TEMP_DIRECTORY = localSettings.getTempDirectory().ToString();// localSettings.getInstance().TEMP_DIRECTORY;
+
             if(!Directory.Exists(TEMP_DIRECTORY))
                 Directory.CreateDirectory(TEMP_DIRECTORY);
 
@@ -41,8 +48,8 @@ namespace Snes360SGC.Forms
             txtLatestVersion.Text = "Check for Updates";
 
 
-            InstalledVersionInfo = version.getCurrentVersion();
-            txtInstalledVersion.Text = InstalledVersionInfo.getFullVersion();
+            InstalledVersionInfo = VersionManagement.getInstalledVersionInfo();
+            txtInstalledVersion.Text = VersionManagement.getInstalledFullVersionString();
 
         }
 
@@ -59,7 +66,7 @@ namespace Snes360SGC.Forms
 
         private void getChangeLog()
         {
-            locationChangeLog = version.getChangeLog(TEMP_DIRECTORY);
+            locationChangeLog = VersionManagement.getChangeLog(TEMP_DIRECTORY);
 
             if (locationChangeLog != "")
             {
@@ -76,10 +83,10 @@ namespace Snes360SGC.Forms
             setLatestVersionFont(Color.Black, FontStyle.Regular);
 
             txtLatestVersion.Text = "Checking...";
-            LatestVersionInfo = version.getNewestVersion(TEMP_DIRECTORY);
-            
+            LatestVersionInfo = VersionManagement.getNewestVersion(TEMP_DIRECTORY);
 
-            if (version.checkIfNewer(InstalledVersionInfo, LatestVersionInfo))
+
+            if (VersionManagement.checkIfNewer(InstalledVersionInfo, LatestVersionInfo))
             {
                 btnUpdate.Enabled = true;
 

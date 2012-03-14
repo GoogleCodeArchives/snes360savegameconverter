@@ -6,7 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.IO;
-using Snes360SGC.Tools.VersionInfo;
+using Snes360SGC.Tools;
+using Snes360SGC.Tools.VersionManager;
 
 namespace Snes360SGC.Forms
 {
@@ -16,17 +17,17 @@ namespace Snes360SGC.Forms
         {
 
             string descriptionText = global::Snes360SGC.Properties.Resources.Description;
-            VersionInfo appVersionInfo = new VersionInfo();
-            VersionInfo.versionInfoStruct appVersion = new VersionInfo.versionInfoStruct();
+            VersionManager appVersionManager = new VersionManager();
+            VersionInfo.versionInfoStruct appVersionInfo = new VersionInfo.versionInfoStruct();
 
-            appVersion = appVersionInfo.getCurrentVersion();
+            appVersionInfo = appVersionManager.getCurrentVersion();
 
-            descriptionText = descriptionText.Replace("[version]", appVersion.getFullVersion());
+            descriptionText = descriptionText.Replace("[version]", appVersionInfo.getFullVersion());
 
             InitializeComponent();
             this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0}", appVersion.getFullVersion());
+            this.labelVersion.Text = String.Format("Version {0}", appVersionInfo.getFullVersion());
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = ""; // AssemblyCompany;
             this.textBoxDescription.Text = descriptionText;//AssemblyDescription;
