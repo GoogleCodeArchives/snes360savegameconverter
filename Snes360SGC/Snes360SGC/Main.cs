@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Snes360SGC.Forms;
+using Snes360SGC.Tools.Settings;
 
 namespace Snes360SGC
 {
     public partial class Main : Form
     {
+        Settings localSettings;
+
         public Main()
         {
             InitializeComponent();
+            localSettings = Settings.getInstance();
             Init();
         }
 
@@ -26,9 +30,10 @@ namespace Snes360SGC
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAbout AboutForm = new frmAbout();
 
-            AboutForm.ShowDialog();
+            //frmAbout AboutForm = new frmAbout();
+
+            //AboutForm.ShowDialog();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

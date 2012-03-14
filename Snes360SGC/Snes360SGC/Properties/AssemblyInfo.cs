@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Snes360SGC")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Scuba156")]
+[assembly: AssemblyCompany("CodeSource")]
 [assembly: AssemblyProduct("Snes360SGC")]
-[assembly: AssemblyCopyright("Copyright ©Scuba156  2012")]
+[assembly: AssemblyCopyright("Copyright ©CodeSource  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
