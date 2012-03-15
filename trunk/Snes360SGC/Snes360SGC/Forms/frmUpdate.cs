@@ -9,13 +9,13 @@ using System.Windows.Forms;
 using System.IO;
 using Snes360SGC.Tools;
 using Snes360SGC.Tools.VersionManager;
-using Snes360SGC.Tools.Settings;
+using Snes360SGC.Tools.SettingsManager;
 
 namespace Snes360SGC.Forms
 {
     public partial class frmUpdate : Form
     {
-        Settings localSettings;// new Settings();
+        SettingsManager localSettings = new SettingsManager(false);// new Settings();
 
         VersionManager VersionManagement = new VersionManager();
 
@@ -30,14 +30,14 @@ namespace Snes360SGC.Forms
         {   
             InitializeComponent();
 
-            localSettings = Settings.getInstance();
+            //localSettings = SettingsINI.getInstance();
 
             Init();
         }
 
         private void Init()
         {
-            TEMP_DIRECTORY = localSettings.getTempDirectory().ToString();// localSettings.getInstance().TEMP_DIRECTORY;
+            TEMP_DIRECTORY = localSettings.getTmpDirectory().ToString();// localSettings.getInstance().TEMP_DIRECTORY;
 
             if(!Directory.Exists(TEMP_DIRECTORY))
                 Directory.CreateDirectory(TEMP_DIRECTORY);
@@ -47,10 +47,8 @@ namespace Snes360SGC.Forms
             txtInstalledVersion.Text = "";
             txtLatestVersion.Text = "Check for Updates";
 
-
             InstalledVersionInfo = VersionManagement.getInstalledVersionInfo();
             txtInstalledVersion.Text = VersionManagement.getInstalledFullVersionString();
-
         }
 
         private void btnClose_Click(object sender, EventArgs e)

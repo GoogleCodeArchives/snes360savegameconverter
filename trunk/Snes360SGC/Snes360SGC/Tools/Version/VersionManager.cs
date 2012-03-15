@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Net;
-using Snes360SGC.Tools.Settings;
+using Snes360SGC.Tools.SettingsManager;
 //using Snes360SGC.Tools.VersionInfo;
 
 namespace Snes360SGC.Tools.VersionManager
@@ -22,7 +22,7 @@ namespace Snes360SGC.Tools.VersionManager
         public VersionManager()
         {
             //Init();
-            getCurrentVersion();
+            this._InstalledVersionInfo = getCurrentVersion();
         }
 
         #region Functions

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Snes360SGC.Tools.Settings;
+using Snes360SGC.Tools.SettingsManager;
 
 namespace Snes360SGC
 {

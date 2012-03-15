@@ -7,18 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Snes360SGC.Forms;
-using Snes360SGC.Tools.Settings;
+using Snes360SGC.Tools.SettingsManager;
 
 namespace Snes360SGC
 {
     public partial class Main : Form
     {
-        Settings localSettings;
+        SettingsManager localSettings = new SettingsManager(false);
 
         public Main()
         {
             InitializeComponent();
-            localSettings = Settings.getInstance();
+            
             Init();
         }
 
@@ -98,6 +98,18 @@ namespace Snes360SGC
             {
                 txtOutputFile.Text = dialogInputFile.FileName;
             }
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmOptions OptionsInstance = new frmOptions();
+
+            OptionsInstance.ShowDialog();
+        }
+
+        private void btnBuild_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

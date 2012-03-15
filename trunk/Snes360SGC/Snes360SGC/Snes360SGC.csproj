@@ -143,15 +143,18 @@
     <Compile Include="SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Settings\Settings.cs" />
-    <Compile Include="Tools\Settings\SettingsINI.cs" />
+    <Compile Include="Tools\Settings\SettingsManager.cs" />
     <Compile Include="Tools\Version\VersionInfo\VersionInfo.cs" />
     <Compile Include="Tools\Version\VersionManager.cs" />
+    <Compile Include="Tools\X360Handler\X360Handler.cs" />
     <EmbeddedResource Include="Forms\frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmChangeLogViewer.resx">
       <DependentUpon>frmChangeLogViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOptions.resx">
+      <DependentUpon>frmOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmUpdate.resx">
       <DependentUpon>frmUpdate.cs</DependentUpon>
@@ -215,10 +218,16 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\X360\X360.csproj">
+      <Project>{404e4aef-58cc-46f2-9b6a-83ce3774b94e}</Project>
+      <Name>X360</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" />
+      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
