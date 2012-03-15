@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Snes360SGC.Tools;
-using Snes360SGC.Tools.Settings;
+using Snes360SGC.Tools.SettingsManager;
 
 namespace Snes360SGC
 {
@@ -17,7 +17,7 @@ namespace Snes360SGC
         private int _ticksPassed;
         const int MIN_TICKS_TILL_LOAD = 36;
 
-        internal Settings SettingsFile = new Settings();// = Settings.getInstance();
+        internal SettingsManager SettingsLocal = new SettingsManager(true);// = Settings.getInstance();
 
         public SplashScreen()
         {
@@ -49,7 +49,7 @@ namespace Snes360SGC
             //}
             //else
             //{
-                SettingsFile = Settings.getInstance();
+                //SettingsFile = SettingsINI.getInstance();
                 _isLoaded = true;
             //}
         }

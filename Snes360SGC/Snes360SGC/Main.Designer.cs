@@ -92,7 +92,8 @@
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.optionsToolStripMenuItem.Text = "&Options";
+            this.optionsToolStripMenuItem.Text = "&Options...";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
@@ -287,6 +288,7 @@
             this.btnBuild.TabIndex = 9;
             this.btnBuild.Text = "&Build";
             this.btnBuild.UseVisualStyleBackColor = true;
+            this.btnBuild.Click += new System.EventHandler(this.btnBuild_Click);
             // 
             // tabPage1
             // 
@@ -311,7 +313,7 @@
             // btnMainExtract
             // 
             this.btnMainExtract.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMainExtract.Location = new System.Drawing.Point(305, 74);
+            this.btnMainExtract.Location = new System.Drawing.Point(305, 107);
             this.btnMainExtract.Name = "btnMainExtract";
             this.btnMainExtract.Size = new System.Drawing.Size(135, 96);
             this.btnMainExtract.TabIndex = 1;
@@ -323,7 +325,7 @@
             // btnMainBuild
             // 
             this.btnMainBuild.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMainBuild.Location = new System.Drawing.Point(56, 74);
+            this.btnMainBuild.Location = new System.Drawing.Point(56, 107);
             this.btnMainBuild.Name = "btnMainBuild";
             this.btnMainBuild.Size = new System.Drawing.Size(135, 96);
             this.btnMainBuild.TabIndex = 0;
@@ -341,8 +343,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(514, 321);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.pnlMainBackground);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
